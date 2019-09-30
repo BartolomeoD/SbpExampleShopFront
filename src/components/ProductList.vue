@@ -78,9 +78,7 @@ export default {
           this.qrId = r.data.qrId;
           this.qrCodeEncoded = `data:image/jpeg;base64,${r.data.encodedQr}`;
           while (this.waitingPurchaise) {
-            console.log(this.waitingPurchaise);
             await http.get(`/payment/status/${this.qrId}`).then(r => {
-              console.log(r.data);
               if (r.data.status != 1) {
                 this.waitingPurchaise = false;
                 if (r.data.status == 0) {
